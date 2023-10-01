@@ -1,8 +1,3 @@
-/* Функция для проверки длины строки. Она принимает строку,
-которую нужно проверить, и максимальную длину и возвращает true,
-если строка меньше или равна указанной длине, и false, если строка длиннее.
-*/
-
 function checkStringLength (isString, stringLength) {
   return (isString.length) <= stringLength;
 }
@@ -13,9 +8,6 @@ checkStringLength('проверяемая строка', 18);
 checkStringLength('проверяемая строка', 10);
 
 
-/*Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза,
-которые одинаково читаются и слева направо и справа налево. Например:
-*/
 
 function checkPalindrome (isString) {
   const upString = isString.toUpperCase();
