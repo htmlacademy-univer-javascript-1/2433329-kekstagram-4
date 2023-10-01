@@ -4,13 +4,13 @@
 */
 
 function checkStringLength (isString, stringLength) {
-  return (isString.length) <= stringLength
+  return (isString.length) <= stringLength;
 }
 
 
-console.log(checkStringLength('проверяемая строка', 20));
-console.log(checkStringLength('проверяемая строка', 18));
-console.log(checkStringLength('проверяемая строка', 10));
+checkStringLength('проверяемая строка', 20);
+checkStringLength('проверяемая строка', 18);
+checkStringLength('проверяемая строка', 10);
 
 
 /*Функция для проверки, является ли строка палиндромом. Палиндром — это слово или фраза,
@@ -18,9 +18,9 @@ console.log(checkStringLength('проверяемая строка', 10));
 */
 
 function checkPalindrome (isString) {
-  let upString = isString.toUpperCase();
-  let isLenth = upString.length;
-  let strMiddle = Math.floor(isLenth/2);
+  const upString = isString.toUpperCase();
+  const isLenth = upString.length;
+  const strMiddle = Math.floor(isLenth/2);
 
   for (let i = 0; i <= strMiddle; i++) {
     if (upString[i] !== upString[isLenth - 1 - i] ) {
@@ -28,10 +28,10 @@ function checkPalindrome (isString) {
     }
   }
 
-  return true
+  return true;
 }
 
-console.log(checkPalindrome('топот'));
-console.log(checkPalindrome('ДовОд'));
-console.log(checkPalindrome('Кекс'));
+checkPalindrome('топот');
+checkPalindrome('ДовОд');
+checkPalindrome('Кекс');
 
