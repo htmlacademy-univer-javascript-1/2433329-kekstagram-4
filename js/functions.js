@@ -2,12 +2,9 @@ function checkStringLength (isString, stringLength) {
   return (isString.length) <= stringLength;
 }
 
-
 checkStringLength('проверяемая строка', 20);
 checkStringLength('проверяемая строка', 18);
 checkStringLength('проверяемая строка', 10);
-
-
 
 function checkPalindrome (isString) {
   const upString = isString.toUpperCase();
