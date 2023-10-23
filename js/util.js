@@ -9,3 +9,5 @@ const getRandomArrayElement = (items) =>
   items[getRandomInteger(0, items.length - 1)];
 
 export {getRandomArrayElement};
+export {getRandomInteger};
+
