@@ -3,7 +3,6 @@ const AVATAR_COUNT = 6;
 const LIKE_COUNT_MIN = 15;
 const LIKE_COUNT_MAX = 200;
 const COMMENT_COUNT = 20;
-
 const COMMENT_LINES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -16,40 +15,32 @@ const DESCRIPTIONS = ['#Аниме','#Лето','#Отдых','#Чилл','#Фа
   '#Радужный','#Фильм','#Осень','#Пейзаж','#Кошка','#Учёба','#Снежинки','#Зайчики',
 ];
 const NAMES = ['Маша Мизери','Владимир Путин','Манечка','Дарья Малыш','Лёля Киселёва','Нана Кондо','Лера Короткова'];
-
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a,b));
   const upper = Math.floor(Math.max(a,b));
   const result = Math.random()*(upper - lower + 1) + lower;
   return Math.floor(result);
 };
-
 const getRandomArrayElement = (items) =>
   items[getRandomInteger(0, items.length - 1)];
-
 const createIdGenerator = () => {
   let lastGeneratedId = 0;
-
   return () => {
     lastGeneratedId += 1;
     return lastGeneratedId;
   };
 };
-
 const generateCommentId = createIdGenerator();
-
 const createMessage = () => Array.from(
   { length: getRandomInteger(1,2)},
   () => getRandomArrayElement(COMMENT_LINES),
 ).join(' ');
-
 const createComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
   message: createMessage(),
   name: getRandomArrayElement(NAMES),
 });
-
 const createPicture = (index) => ({
   id: index,
   url: `photos/${index}.jpg`,
@@ -60,10 +51,8 @@ const createPicture = (index) => ({
     createComment,
   ),
 });
-
 const getPictures = () => Array.from(
   { length: PICTURE_COUNT },
   (_, pictureIndex) => createPicture(pictureIndex + 1),
 );
-
 getPictures();
