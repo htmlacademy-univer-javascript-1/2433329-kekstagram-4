@@ -38,7 +38,7 @@ function checkMeeting(startTime, endTime, meetingStart, meetingDuration) {
 
 function convertToMinutes(time) {
   const [hours, minutes] = time.split(':');
-  return parseInt(hours) * 60 + parseInt(minutes);
+  return parseInt(hours, 10) * 60 + parseInt(minutes, 10);
 }
 
 checkMeeting('08:00', '17:30', '14:00', 90);
