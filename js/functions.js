@@ -29,11 +29,7 @@ function checkMeeting(startTime, endTime, meetingStart, meetingDuration) {
   const endMinutes = convertToMinutes(endTime);
   const meetingStartMinutes = convertToMinutes(meetingStart);
   const meetingEndMinutes = meetingStartMinutes + meetingDuration;
-  if (meetingStartMinutes >= startMinutes && meetingEndMinutes <= endMinutes) {
-    return true;
-  } else {
-    return false;
-  }
+  return (meetingStartMinutes >= startMinutes) && (meetingEndMinutes <= endMinutes);
 }
 
 function convertToMinutes(time) {
