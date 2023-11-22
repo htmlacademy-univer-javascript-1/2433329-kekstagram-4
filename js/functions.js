@@ -24,3 +24,17 @@ checkPalindrome('топот');
 checkPalindrome('ДовОд');
 checkPalindrome('Кекс');
 
+function checkMeeting(startTime, endTime, meetingStart, meetingDuration) {
+  const startMinutes = convertToMinutes(startTime);
+  const endMinutes = convertToMinutes(endTime);
+  const meetingStartMinutes = convertToMinutes(meetingStart);
+  const meetingEndMinutes = meetingStartMinutes + meetingDuration;
+  return (meetingStartMinutes >= startMinutes) && (meetingEndMinutes <= endMinutes);
+}
+
+function convertToMinutes(time) {
+  const [hours, minutes] = time.split(':');
+  return parseInt(hours, 10) * 60 + parseInt(minutes, 10);
+}
+
+checkMeeting('08:00', '17:30', '14:00', 90);
