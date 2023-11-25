@@ -1,5 +1,4 @@
-import {getRandomArrayElement} from './util.js';
-import {getRandomInteger} from './util.js';
+import { getRandomInteger, getRandomArrayElement, createIdGenerator } from './util.js';
 
 const PICTURE_COUNT = 25;
 const AVATAR_COUNT = 6;
@@ -19,15 +18,6 @@ const DESCRIPTIONS = ['#Аниме','#Лето','#Отдых','#Чилл','#Фа
   '#Радужный','#Фильм','#Осень','#Пейзаж','#Кошка','#Учёба','#Снежинки','#Зайчики',
 ];
 const NAMES = ['Маша Мизери','Владимир Путин','Манечка','Дарья Малыш','Лёля Киселёва','Нана Кондо','Лера Короткова'];
-
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
-
-  return () => {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
 
 const generateCommentId = createIdGenerator();
 
