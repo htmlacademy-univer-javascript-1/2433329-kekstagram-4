@@ -91,7 +91,6 @@ const showPicture = (pictureData) => {
   document.addEventListener('keydown', onDocumentKeydown);
   commentsArray = pictureData.comments;
   renderComments();
-  initCommentsList();
 
   renderPicture(pictureData);
 };
