@@ -27,8 +27,6 @@ const createComment = ({ avatar, message, name }) => {
 };
 
 const renderComments = () => {
-  commentsCoutShown += COUNT_SHOWN_COMMENTS;
-
   if (commentsCoutShown >= commentsArray.length) {
     commentsLoaderElement.classList.add('hidden');
     commentsCoutShown = commentsArray.length;
@@ -48,6 +46,7 @@ const renderComments = () => {
 
   shownCommentCountElement.textContent = commentsCoutShown;
   totalCommentCountElement.textContent = commentsArray.length;
+  commentsCoutShown += COUNT_SHOWN_COMMENTS;
 };
 
 const onCommentsLoaderClick = () => {
