@@ -60,12 +60,11 @@ const isTextFiledFocused = () =>
   document.activeElement === textDescriptionElement;
 
 function onDocumentKeydown(evt) {
-  const isErrorMessageExists = Boolean(document.querySelector('.error'));
   if (isEscapeKey(evt) && !isTextFiledFocused()) {
     evt.preventDefault();
     closeForm();
   }
-};
+}
 
 const normalizeTags = (tagString) => tagString
   .trim()
