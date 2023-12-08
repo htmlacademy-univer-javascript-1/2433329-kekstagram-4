@@ -2,11 +2,13 @@ import { isEscapeKey } from './util.js';
 
 const COUNT_MAX_HASHTAG = 5;
 const VALID_SIMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
+const MAX_LENGTH = 140;
 
 const ERROR_TEXT = {
   INVALID_COUNT: `Максимум ${COUNT_MAX_HASHTAG} хэштэгов`,
   NOT_UNIQUE: 'Хэштэги должны быть уникальными',
   INVALID_PATTERN: 'Неправильный хэштэг',
+  INVALID_LENGTH: 'Комментарий не может быть длиннее 140 символов!',
 };
 
 const bodyElement = document.querySelector('body');
@@ -42,8 +44,11 @@ const onUploadInputChange = () => {
 };
 
 const onFormElementSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+  const isValid = pristine.validate();
+
+  if (!isValid) {
+    evt.preventDefault();
+  }
 };
 
 const onCancelButtonClick = () => {
@@ -55,11 +60,12 @@ const isTextFiledFocused = () =>
   document.activeElement === textDescriptionElement;
 
 function onDocumentKeydown(evt) {
+  const isErrorMessageExists = Boolean(document.querySelector('.error'));
   if (isEscapeKey(evt) && !isTextFiledFocused()) {
     evt.preventDefault();
     closeForm();
   }
-}
+};
 
 const normalizeTags = (tagString) => tagString
   .trim()
@@ -78,9 +84,12 @@ const validateHashtagsRepeate = (value) => {
   return lowerCaseTags.length === uniqueHashtags.length;
 };
 
+const validateTextCommentLength = () => textDescriptionElement.value.length <= MAX_LENGTH;
+
 pristine.addValidator(textHashtagsElement, validateHashtags, ERROR_TEXT.INVALID_PATTERN, 1, true);
 pristine.addValidator(textHashtagsElement, validateHashtagsRepeate, ERROR_TEXT.NOT_UNIQUE, 2, true);
 pristine.addValidator(textHashtagsElement, validateHashtagsCount, ERROR_TEXT.INVALID_COUNT, 3, true);
+pristine.addValidator(textDescriptionElement, validateTextCommentLength, ERROR_TEXT.INVALID_LENGTH, true);
 
 uploadInput. addEventListener('change', onUploadInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
