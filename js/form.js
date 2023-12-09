@@ -1,4 +1,6 @@
 import { isEscapeKey } from './util.js';
+import { init as initEffect, reset as resetEffect } from './effect.js';
+import { resetScale } from './scale.js';
 
 const COUNT_MAX_HASHTAG = 5;
 const VALID_SIMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -33,6 +35,8 @@ const openForm = () => {
 
 const closeForm = () => {
   formElement.reset();
+  resetEffect();
+  resetScale();
   pristine.reset();
   uploadOverlay.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
@@ -93,3 +97,4 @@ pristine.addValidator(textDescriptionElement, validateTextCommentLength, ERROR_T
 uploadInput. addEventListener('change', onUploadInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 formElement.addEventListener('submit', onFormElementSubmit);
+initEffect();
