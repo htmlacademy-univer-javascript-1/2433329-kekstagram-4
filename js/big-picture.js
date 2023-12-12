@@ -1,4 +1,4 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from './utils.js';
 import { renderComments, initCommentsList } from './comment.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
