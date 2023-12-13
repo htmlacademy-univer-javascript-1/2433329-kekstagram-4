@@ -16,8 +16,8 @@ const ERROR_TEXT = {
 };
 
 const SubmitButtonText = {
-    IDLE: 'Опубликовать',
-    SENDING: 'Отправляю...'
+  IDLE: 'Опубликовать',
+  SENDING: 'Отправляю...'
 };
 
 const bodyElement = document.querySelector('body');
@@ -36,12 +36,12 @@ const pristine = new Pristine(formElement, {
 });
 
 const toggleSubmitButton = (isDisabled) => {
-    submitButton.disabled = isDisabled;
-    if (isDisabled) {
-      submitButton.textContent = SubmitButtonText.SENDING;
-    } else {
-      submitButton.textContent = SubmitButtonText.IDLE;
-    }
+  submitButton.disabled = isDisabled;
+  if (isDisabled) {
+    submitButton.textContent = SubmitButtonText.SENDING;
+  } else {
+    submitButton.textContent = SubmitButtonText.IDLE;
+  }
 };
 
 const openForm = () => {
@@ -65,19 +65,19 @@ const onUploadInputChange = () => {
 };
 
 const sendForm = async (form) => {
-    if (! pristine.validate()) {
-      return;
-    }
-    try {
-      toggleSubmitButton(true);
-      await sendPicture(new FormData(form));
-      toggleSubmitButton(false);
-      closeForm();
-      showSuccessMessage();
-    } catch (error) {
-      showErrorMessage();
-      toggleSubmitButton(false);
-    }
+  if (! pristine.validate()) {
+    return;
+  }
+  try {
+    toggleSubmitButton(true);
+    await sendPicture(new FormData(form));
+    toggleSubmitButton(false);
+    closeForm();
+    showSuccessMessage();
+  } catch (error) {
+    showErrorMessage();
+    toggleSubmitButton(false);
+  }
 };
 
 const onFormElementSubmit = (evt) => {
@@ -86,12 +86,16 @@ const onFormElementSubmit = (evt) => {
 };
 
 const isErrorMessageExists = () => {
-    Boolean(document.querySelector('.error'));
+  Boolean(document.querySelector('.error'));
 };
 
 const onCancelButtonClick = () => {
   closeForm();
 };
+
+const isTextFiledFocused = () =>
+  document.activeElement === textHashtagsElement ||
+  document.activeElement === textDescriptionElement;
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !isTextFiledFocused() && !isErrorMessageExists) {
@@ -99,10 +103,6 @@ function onDocumentKeydown(evt) {
     closeForm();
   }
 }
-
-const isTextFiledFocused = () =>
-  document.activeElement === textHashtagsElement ||
-  document.activeElement === textDescriptionElement;
 
 const normalizeTags = (tagString) => tagString
   .trim()
