@@ -11,3 +11,5 @@ const bootstrap = async () => {
     showAlert();
   }
 };
+
+bootstrap();
