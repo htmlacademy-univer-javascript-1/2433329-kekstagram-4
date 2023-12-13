@@ -81,11 +81,6 @@ const sendForm = async (form) => {
 };
 
 const onFormElementSubmit = (evt) => {
-    evt.preventDefault();
-    sendForm(evt.target);;
-};
-
-const onFormElementSubmit = (evt) => {
   evt.preventDefault();
   sendForm(evt.target);
 };
@@ -108,13 +103,6 @@ function onDocumentKeydown(evt) {
 const isTextFiledFocused = () =>
   document.activeElement === textHashtagsElement ||
   document.activeElement === textDescriptionElement;
-
-function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && !isTextFiledFocused()) {
-    evt.preventDefault();
-    closeForm();
-  }
-}
 
 const normalizeTags = (tagString) => tagString
   .trim()
