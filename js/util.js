@@ -13,7 +13,7 @@ const showErrorMessage = () => {
   }, REMOVE_MESSAGE_TIMEOUT);
 };
 
-const showAlert = (message) => {
+const showAlert = () => {
   const alert = document.querySelector('div');
   alert.style.position = 'absolute';
   alert.style.zIndex = '100';
