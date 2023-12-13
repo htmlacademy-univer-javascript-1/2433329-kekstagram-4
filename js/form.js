@@ -74,7 +74,7 @@ const sendForm = async (form) => {
       toggleSubmitButton(false);
       closeForm();
       showSuccessMessage();
-    } catch {
+    } catch (error) {
       showErrorMessage();
       toggleSubmitButton(false);
     }

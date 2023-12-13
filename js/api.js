@@ -23,7 +23,7 @@ const request = (route, errorText, method = HttpMethod.GET, body = null) =>
       return response.json();
     })
     .catch((err) => {
-      return { error: true, message: errorText ?? err.message };
+      return { error: true, message: errorText || err.message };
     });
 
 
