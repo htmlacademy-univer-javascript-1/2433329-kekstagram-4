@@ -1,21 +1,31 @@
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a,b));
-  const upper = Math.floor(Math.max(a,b));
-  const result = Math.random()*(upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-const getRandomArrayElement = (items) =>
-  items[getRandomInteger(0, items.length - 1)];
-
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
-  return () => {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getRandomInteger, getRandomArrayElement, createIdGenerator, isEscapeKey };
+const REMOVE_MESSAGE_TIMEOUT = 5000;
+
+const errorMessageElement = document.querySelector('#error')
+  .content.querySelector('.error');
+
+const showErrorMessage = () => {
+  const errorElement = errorMessageElement.cloneNode(true);
+  document.body.append(errorElement);
+  setTimeout (() => {
+    errorElement.remove();
+  }, REMOVE_MESSAGE_TIMEOUT);
+};
+
+const showAlert = (message) => {
+  const alert = document.querySelector('div');
+  alert.style.position = 'absolute';
+  alert.style.zIndex = '100';
+  alert.style.left= '0';
+  alert.style.top = '0';
+  alert.style.right = '0';
+  alert.style.padding = '10px 3px';
+  alert.style.fontSize = '30px';
+  alert.style.textAlign = 'center';
+  alert.style.backgroundClip = 'red';
+  alert.textContent = 'Не удалось загрузить данные.Попробуйте обновить страницу';
+  document.body.append(alert);
+};
+
+export { isEscapeKey, showErrorMessage, showAlert};

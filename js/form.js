@@ -82,7 +82,7 @@ const sendForm = async (form) => {
 
 const onFormElementSubmit = (evt) => {
   evt.preventDefault();
-  sendForm(evt.target);;
+  sendForm(evt.target);
 };
 
 const onCancelButtonClick = () => {
