@@ -22,9 +22,7 @@ const request = (route, errorText, method = HttpMethod.GET, body = null) =>
       }
       return response.json();
     })
-    .catch((err) => {
-      return { error: true, message: errorText || err.message };
-    });
+    .catch((err) => ({ error: true, message: errorText || err.message }));
 
 
 const loadPictures = async () => request(ServerRoute.GET_DATA, ErrorText.GET_DATA);
