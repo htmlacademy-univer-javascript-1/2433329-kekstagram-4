@@ -5,15 +5,15 @@ const successMessageElement = document.querySelector('#success')
 const errorMessageElement = document.querySelector('#error')
   .content.querySelector('.error');
 
-  const hideMessage = () => {
-    const existsElement = document.querySelector('.success') || document.querySelector('.error');
+const hideMessage = () => {
+  const existsElement = document.querySelector('.success') || document.querySelector('.error');
 
-    if (existsElement) {
-      existsElement.remove();
-    }
+  if (existsElement) {
+    existsElement.remove();
+  }
 
-    document.removeEventListener('keydown', onDocumentKeydown);
-  };
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
 
 const onCloseButtonClick = () => {
   hideMessage();
