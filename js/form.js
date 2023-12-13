@@ -1,6 +1,8 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from './utils.js';
 import { init as initEffect, reset as resetEffect } from './effect.js';
 import { resetScale } from './scale.js';
+import { sendPicture } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
 
 const COUNT_MAX_HASHTAG = 5;
 const VALID_SIMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -13,6 +15,11 @@ const ERROR_TEXT = {
   INVALID_LENGTH: 'Комментарий не может быть длиннее 140 символов!',
 };
 
+const SubmitButtonText = {
+    IDLE: 'Опубликовать',
+    SENDING: 'Отправляю...'
+};
+
 const bodyElement = document.querySelector('body');
 const formElement = document.querySelector('.img-upload__form');
 const uploadInput = formElement.querySelector('.img-upload__input');
@@ -20,12 +27,22 @@ const uploadOverlay = formElement.querySelector('.img-upload__overlay');
 const cancelButton = formElement.querySelector('.img-upload__cancel');
 const textHashtagsElement = formElement.querySelector('.text__hashtags');
 const textDescriptionElement = formElement.querySelector('.text__description');
+const submitButton = formElement.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
 });
+
+const toggleSubmitButton = (isDisabled) => {
+    submitButton.disabled = isDisabled;
+    if (isDisabled) {
+      submitButton.textContent = SubmitButtonText.SENDING;
+    } else {
+      submitButton.textContent = SubmitButtonText.IDLE;
+    }
+};
 
 const openForm = () => {
   uploadOverlay.classList.remove('hidden');
@@ -47,17 +64,46 @@ const onUploadInputChange = () => {
   openForm();
 };
 
-const onFormElementSubmit = (evt) => {
-  const isValid = pristine.validate();
+const sendForm = async (form) => {
+    if (! pristine.validate()) {
+      return;
+    }
+    try {
+      toggleSubmitButton(true);
+      await sendPicture(new FormData(form));
+      toggleSubmitButton(false);
+      closeForm();
+      showSuccessMessage();
+    } catch {
+      showErrorMessage();
+      toggleSubmitButton(false);
+    }
+};
 
-  if (!isValid) {
+const onFormElementSubmit = (evt) => {
     evt.preventDefault();
-  }
+    sendForm(evt.target);;
+};
+
+const onFormElementSubmit = (evt) => {
+  evt.preventDefault();
+  sendForm(evt.target);
+};
+
+const isErrorMessageExists = () => {
+    Boolean(document.querySelector('.error'));
 };
 
 const onCancelButtonClick = () => {
   closeForm();
 };
+
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt) && !isTextFiledFocused() && !isErrorMessageExists) {
+    evt.preventDefault();
+    closeForm();
+  }
+}
 
 const isTextFiledFocused = () =>
   document.activeElement === textHashtagsElement ||
@@ -94,7 +140,7 @@ pristine.addValidator(textHashtagsElement, validateHashtagsRepeate, ERROR_TEXT.N
 pristine.addValidator(textHashtagsElement, validateHashtagsCount, ERROR_TEXT.INVALID_COUNT, 3, true);
 pristine.addValidator(textDescriptionElement, validateTextCommentLength, ERROR_TEXT.INVALID_LENGTH, true);
 
-uploadInput. addEventListener('change', onUploadInputChange);
+uploadInput.addEventListener('change', onUploadInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 formElement.addEventListener('submit', onFormElementSubmit);
 initEffect();
