@@ -28,4 +28,12 @@ const showAlert = () => {
   document.body.append(alert);
 };
 
-export { isEscapeKey, showErrorMessage, showAlert};
+function finder (callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export { isEscapeKey, showErrorMessage, showAlert, finder};
