@@ -1,6 +1,7 @@
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const REMOVE_MESSAGE_TIMEOUT = 5000;
+const TIMEOUT_DELAY = 500;
 
 const errorMessageElement = document.querySelector('#error')
   .content.querySelector('.error');
@@ -28,7 +29,7 @@ const showAlert = () => {
   document.body.append(alert);
 };
 
-function finder (callback, timeoutDelay = 500) {
+function finder (callback, timeoutDelay = TIMEOUT_DELAY) {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);

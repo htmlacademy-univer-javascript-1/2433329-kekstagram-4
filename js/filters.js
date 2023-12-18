@@ -49,9 +49,10 @@ const filterHandlers = {
 const repair = (evt, filter, data) => {
   const filteredData = filterHandlers[filter](data);
   const pictures = document.querySelectorAll('.picture');
+  const currentActiveElement = filtersFormElement.querySelector('.img-filters__button--active');
+
   pictures.forEach((item) => item.remove());
   renderGallery(filteredData);
-  const currentActiveElement = filtersFormElement.querySelector('.img-filters__button--active');
   currentActiveElement.classList.remove('img-filters__button--active');
   evt.target.classList.add('img-filters__button--active');
 };
